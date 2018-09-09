@@ -9,11 +9,12 @@ import { EditClientComponent } from "./components/edit-client/edit-client.compon
 import { ClientDetailsComponent } from "./components/client-details/client-details.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { RegisterGuard } from './guards/register.guard';
 
 const routes: Routes = [
   { path: "", component: DashboardComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
+  { path: "register", component: RegisterComponent, canActivate: [RegisterGuard] },
   {
     path: "client/add",
     component: AddClientComponent,
@@ -36,6 +37,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, RegisterGuard]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

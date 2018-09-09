@@ -5,6 +5,8 @@ import { FlashMessagesService } from "angular2-flash-messages";
 
 import { Router, Params } from "@angular/router";
 
+import { SettingsService} from '../../services/settings.service';
+
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
@@ -18,8 +20,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private flashMessagesService: FlashMessagesService,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private settingsService: SettingsService
+  ) { }
 
   ngOnInit() {
     this.authService.getAuth().subscribe(auth => {
@@ -30,6 +33,8 @@ export class NavbarComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
+
+    this.showRegister = this.settingsService.getSettings().allowRegistration;
   }
 
   onLogoutClick() {

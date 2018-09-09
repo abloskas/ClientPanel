@@ -7,12 +7,12 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(private afAuth: AngularFireAuth) { }
 
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.afAuth.auth
-        .createUserWithEmailAndPassword(email, password)
+        .signInWithEmailAndPassword(email, password)
         .then(userData => resolve(userData), err => reject(err));
     });
   }
